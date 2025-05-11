@@ -19,14 +19,6 @@ public class BasicAlgSort<T extends Comparable<? super T>> {
         return array;
     }
 
-    // Метод для обміну елементів
-    private void swap(int leftIndex, int rightIndex) {
-        T temp = array[leftIndex];
-        array[leftIndex] = array[rightIndex];
-        array[rightIndex] = temp;
-    }
-
-    // --- Сортування за зростанням ---
     public void bubbleSortAsc() {
         boolean flagForInteration = true;
         while (flagForInteration) {
@@ -40,6 +32,11 @@ public class BasicAlgSort<T extends Comparable<? super T>> {
                 }
             }
         }
+    }
+    private void swap(int leftIndex, int rightIndex){
+    T temp = array[leftIndex];
+    array[leftIndex] = array[rightIndex];
+    array[rightIndex] = temp;
     }
 
     public void selectionSortAsc() {
@@ -93,70 +90,5 @@ public class BasicAlgSort<T extends Comparable<? super T>> {
         }
     }
 
-    // --- Додаємо методи для сортування за спаданням ---
-    public void bubbleSortDesc() {
-        boolean flagForInteration = true;
-        while (flagForInteration) {
-            flagForInteration = false;
-            for (int i = 1; i < array.length; i++) {
-                if (array[i].compareTo(array[i - 1]) > 0) { // Порівняння для спадання
-                    swap(i, i - 1);
-                    if (!flagForInteration) {
-                        flagForInteration = true;
-                    }
-                }
-            }
-        }
-    }
-
-    public void selectionSortDesc() {
-        for (int i = 0; i < array.length; i++) {
-            int maxIndex = i;
-            T max = array[i];
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[j].compareTo(max) > 0) { // Порівняння для спадання
-                    max = array[j];
-                    maxIndex = j;
-                }
-            }
-            if (i != maxIndex) swap(i, maxIndex); // Міняємо місцями максимальний елемент
-        }
-    }
-
-    public void insertionSortWithLinearSearchDesc() {
-        for (int i = 1; i < array.length; i++) {
-            T key = array[i];
-            int j = i;
-            for (; j > 0; j--) {
-                if (key.compareTo(array[j - 1]) > 0) { // Порівняння для спадання
-                    array[j] = array[j - 1];
-                } else {
-                    break;
-                }
-            }
-            array[j] = key;
-        }
-    }
-
-    public void insertionSortWithBinarySearchDesc() {
-        for (int i = 1; i < array.length; i++) {
-            T key = array[i];
-            int leftIndex = 0;
-            int rightIndex = i - 1;
-            if (key.compareTo(array[i - 1]) > 0) { // Порівняння для спадання
-                while (leftIndex < rightIndex) {
-                    int midIndex = (rightIndex + leftIndex) / 2;
-                    if (key.compareTo(array[midIndex]) > 0) { // Порівняння для спадання
-                        rightIndex = midIndex;
-                    } else {
-                        leftIndex = midIndex + 1;
-                    }
-                }
-                for (int j = i; j > leftIndex; j--) {
-                    array[j] = array[j - 1];
-                }
-                array[leftIndex] = key;
-            }
-        }
-    }
 }
+
